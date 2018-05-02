@@ -1,0 +1,53 @@
+Stock Analysis
+========================================================
+author: Mike G.
+date: 5/2/2018
+autosize: true
+
+Overview
+========================================================
+
+This presentation includes documentation for the Stock Analysis application.
+
+This application relies on the quantmod package and pulls information for the folloiwng stocks/indices:
+- Apple (APPL)
+- Google (GOOG)
+- Microsoft (MSFT)
+- Amazon (AMZN)
+- Facebook (FB)
+
+
+It builds plots for the closing price, daily return, and volume. It can also display a trendline for the closing price, as well as the equation of the linear trend line.
+
+Shiny files
+========================================================
+The application is build using the Shiny package in R. The source code is in 2 files:
+- `ui.R`
+- `server.R`
+
+Both files are located in the following GitHub repo: [GitHub repo](https://github.com/avkch/Course-Project-Shiny-Application-and-Reproducible-Pitch) 
+
+
+Grabbing stock data
+========================================================
+```{r, include=FALSE}
+library(shiny)
+library(ggplot2)
+library(scales)
+library(quantmod)
+library(dplyr)
+library(zoo)
+library(gridExtra)
+```
+
+```{r}
+SymbolsToGrab = c('AAPL', 'GOOG', 'MSFT', 'AMZN', 'FB')
+getSymbols(Symbols = SymbolsToGrab)
+head(AAPL)
+```
+
+Application functionality
+========================================================
+The application allows users to select a stock, the date range, and whether to add a trend line, a daily return graph, and a volume graph.
+
+If a trend line is added to the stock price chart, the equation is displayed below the graphs. Currently, a linear model is fit to the data.
